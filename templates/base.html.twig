@@ -54,22 +54,26 @@
 						</li>
 					</ul>
 					<ul class="navbar-nav me-auto">
-						{% if not
-is_granted('IS_AUTHENTICATED_FULLY') %}
+						{% if not is_granted('IS_AUTHENTICATED_FULLY') %}
 							<li class="nav-item">
-								<a class="nav-link" href="{{path('app_login')}}">Se connecter
-								</a>
+								<a class="nav-link text-white" href="{{path('app_login')}}">Se connecter</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" href="{{path('app_register')}}">S'inscrire
-								</a>
+								<a class="nav-link text-white" href="{{path('app_register')}}">S'inscrire</a>
 							</li>
 						{% else %}
+							{% if is_granted('ROLE_ADMIN') or is_granted('ROLE_MOD')%}
+								<li class="nav-item">
+									<a class="nav-link text-white" href="{{path('app_liste_contacts')}}">Liste des contacts</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link text-white" href="{{path('app_liste_users')}}">Liste des users</a>
+								</li>
+							{% endif %}
 							<li class="nav-item">
-								<a class="nav-link" href="{{path('app_logout')}}">
+								<a class="nav-link text-white" href="{{path('app_logout')}}">
 									{{app.user.email}}
-									<i class="bi
-										bi-x-circle-fill"></i>
+									<i class="bi bi-x-circle-fill text-white"></i>
 								</a>
 							</li>
 						{% endif %}
