@@ -34,4 +34,13 @@ class FichierController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+    #[Route('/mod-liste-fichiers', name: 'app_liste_fichiers')]
+    public function listeFichiers(FichiersRepository $fichiersRepository): Response
+    {
+        $fichiers = $fichiersRepository->findAll();
+        return $this->render('fichier/liste-fichiers.html.twig', [
+            'fichiers' => $fichiers
+        ]);
+    }
 }
